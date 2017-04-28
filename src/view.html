@@ -1,0 +1,51 @@
+<style>
+    .my-drop-zone { border: dotted 3px lightgray; }
+    .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+    .another-file-over-class { border: dotted 3px green; }
+    html, body { height: 100%; }
+</style>
+<div>
+  <!-- Domain Report -->
+  <label for="domain">Domain Report</label>
+  <form role="form">
+    <div class="form-group">
+      <input type="text" class="form-control" id="domain" ng-model="domain" placeholder="Enter a domain">
+      <button ng-click="domainReport()">Submit</button>
+    </div>
+  </form>
+
+  <!-- IP Scan -->
+  <label for="domain">IP Scan</label>
+  <form role="form">
+    <div class="form-group">
+      <input type="text" class="form-control" id="ip" ng-model="ip" placeholder="Enter an IP Address">
+      <button ng-click="ipReport()">Submit</button>
+    </div>
+  </form>
+
+  <!-- URL Scan -->
+  <label for="url">URL Scan</label>
+  <form role="form">
+    <div class="form-group">
+      <input type="text" class="form-control" id="url" ng-model="url" placeholder="Enter a url">
+      <button ng-click="urlScan()">Submit</button>
+    </div>
+  </form>
+
+  <!-- File upload -->
+  <label for="upload">File Upload</label>
+  <input id="upload" type="file" nv-file-select="" uploader="uploader" options="{ url: '{{virusTotalUrl}}/file/scan' }" />
+  <br />
+  <div nv-file-drop="" uploader="uploader" options="{ url: '{{virusTotalUrl}}/file/scan' }">
+    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+        Drop a file here to scan
+    </div>
+  </div>
+  <div ng-if="upload_progress" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{upload_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{upload_progress}}%">
+      <span class="sr-only">{{upload_progress}}% Complete</span>
+    </div>
+  </div>
+
+  <pre>{{output | json}}</pre>
+</div>
