@@ -85,12 +85,12 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
     };
     uploader.onSuccessItem = function(fileItem, response, status, headers) {
         $scope.output = response;
-        logger.info({service: 'VirusTotal', command: 'fileScan', data: response});
+        logger.info({widget: 'VirusTotal', command: 'fileScan', output: response });
         $scope.upload_progress = null;
     };
     uploader.onErrorItem = function(fileItem, response, status, headers) {
         console.info('onErrorItem', fileItem, response, status, headers);
-        logger.error({service: 'VirusTotal', command: 'fileScan', data: response});
+        logger.error({widget: 'VirusTotal', command: 'fileScan', output: response });
         $scope.upload_progress = null;
     };
 
@@ -99,7 +99,7 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
       if (!config.apikey) {
           /* Error: Missing API Key */
           $scope.output = 'Missing API Key. See Widget settings.';
-          logger.error({service: 'VirusTotal', command: 'domainReport', data: 'Missing API Key. See Widget settings.'});
+          logger.error({widget: 'VirusTotal', command: 'domainReport', output: 'Missing API Key. See Widget settings.'});
           return;
       }
 
@@ -107,11 +107,11 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
       promise.then(function(response) {
         /* Success */
         $scope.output = response.data;
-        logger.info({service: 'VirusTotal', command: 'domainReport', data: response.data});
+        logger.info({widget: 'VirusTotal', command: 'domainReport', output: response.data });
       }, function(reason) {
         /* Failed */
         $scope.output = reason;
-        logger.error({service: 'VirusTotal', command: 'domainReport', data: reason});
+        logger.error({widget: 'VirusTotal', command: 'domainReport', output: reason});
       });
     }
 
@@ -120,7 +120,7 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
       if (!config.apikey) {
           /* Error: Missing API Key */
           $scope.output = 'Missing API Key. See Widget settings.';
-          logger.error({service: 'VirusTotal', command: 'urlScan', data: 'Missing API Key. See Widget settings.'});
+          logger.error({service: 'VirusTotal', command: 'urlScan', output: 'Missing API Key. See Widget settings.'});
           return;
       }
 
@@ -131,7 +131,7 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
       }, function(reason) {
         /* Failed */
         $scope.output = reason;
-        logger.error({service: 'VirusTotal', command: 'urlScan', data: reason});
+        logger.error({widget: 'VirusTotal', command: 'urlScan', output: reason});
       });
     }
 
@@ -140,7 +140,7 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
       if (!config.apikey) {
           /* Error: Missing API Key */
           $scope.output = 'Missing API Key. See Widget settings.';
-          logger.error({service: 'VirusTotal', command: 'ipReport', data: 'Missing API Key. See Widget settings.'});
+          logger.error({widget: 'VirusTotal', command: 'ipReport', output: 'Missing API Key. See Widget settings.'});
           return;
       }
 
@@ -153,7 +153,7 @@ angular.module('DevopsDashboard.widget.virustotal', ['adf.provider', 'angularFil
         /* Failed */
         console.log('Failed: ', reason);
         $scope.output = reason;
-        logger.error({service: 'VirusTotal', command: 'ipReport', data: reason});
+        logger.error({widget: 'VirusTotal', command: 'ipReport', output: reason});
       });
     }
 
